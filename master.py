@@ -1,12 +1,7 @@
-'oke'
-for bitch in here:
-    aheroqihweo
-<<<<<<< HEAD
-=======
-    asd
->>>>>>> 06161c91131c660355524fb6e82d11a27a9b956e
+import datetime
+datetime = datetime.datetime.now()
 
-test
+def ingaanstijd():
+    sql_command = '''CREATE TABLE ingaanstijd (ID INTEGER PRIMARY KEY, parkeervak CHAR(1), datum = datetime, tijd = datetime);'''
 
-bitch
-
+ingaanstijd()

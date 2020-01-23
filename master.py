@@ -1,3 +1,6 @@
+for bitch in here:
+    aheroqihweo
+
 import datetime
 datetime = datetime.datetime.now()
 

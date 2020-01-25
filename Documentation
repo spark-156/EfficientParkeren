@@ -1,0 +1,14 @@
+Apache webserver address voor internet browser:
+    169.254.9.85 (laptop)
+    192.168.42.* (RaspberryPiSensoren, * kan 2, 3, ... t/m 9 zijn)
+    /phpmyadmin (achter het ip om bij de phpmyadmin te komen)
+        Username: "PHPMyAdmin"
+        WW: "Youtube"
+RaspberryPiServer
+    fe80::dea6:32ff:fe1e:89b9 (IPv6 adres voor PuTTY)
+    Username: "Pi"
+    Vraag Luca voor het wachtwoord
+
+    MariaDB mySQL server
+    Apache2
+    PHPMyAdmin

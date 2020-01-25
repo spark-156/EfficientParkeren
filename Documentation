@@ -12,3 +12,8 @@ RaspberryPiServer
     MariaDB mySQL server
     Apache2
     PHPMyAdmin
+
+RaspberryPiSensoren
+    MySqlConnector module
+    username: "RaspberryPiSensoren"
+    WW: "DaanDaan123"

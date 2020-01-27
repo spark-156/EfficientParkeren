@@ -34,7 +34,6 @@ def drukte():
         GPIO.output(bluedrukte, GPIO.LOW)
         GPIO.output(greendrukte, GPIO.LOW)
         GPIO.output(reddrukte, GPIO.HIGH)
-    elif dist > 25 and dist2 < 25 or dist2 > 25 and dist < 25:
     elif dist1 > 25 and dist2 < 25 or dist2 > 25 and dist1 < 25:
         GPIO.output(reddrukte, GPIO.LOW)
         GPIO.output(greendrukte, GPIO.LOW)

@@ -5,13 +5,16 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 
-green = 5
-red = 6
+greendrukte = 5
+bluedrukte = 6
+reddrukte = 11
 
-GPIO.setup(red, GPIO.OUT)
-GPIO.output(red, GPIO.LOW)
-GPIO.setup(green, GPIO.OUT)
-GPIO.output(green, GPIO.LOW)
+GPIO.setup(reddrukte, GPIO.OUT)
+GPIO.output(reddrukte, GPIO.LOW)
+GPIO.setup(bluedrukte, GPIO.OUT)
+GPIO.output(bluedrukte, GPIO.LOW)
+GPIO.setup(greendrukte, GPIO.OUT)
+GPIO.output(greendrukte, GPIO.LOW)
 
 try:
     while True:
@@ -25,12 +28,18 @@ try:
         s2.lampjes()
         time.sleep(2)
 
-        if dist > 20 and dist2 > 20:
-            GPIO.output(red, GPIO.LOW)
-            GPIO.output(green, GPIO.HIGH)
-        if dist < 20 and dist2 < 20:
-            GPIO.output(green, GPIO.LOW)
-            GPIO.output(red, GPIO.HIGH)
+        if dist > 25 and dist2 > 25:
+            GPIO.output(bluedrukte, GPIO.LOW)
+            GPIO.output(reddrukte, GPIO.LOW)
+            GPIO.output(greendrukte, GPIO.HIGH)
+        elif dist < 25 and dist2 < 25:
+            GPIO.output(bluedrukte, GPIO.LOW)
+            GPIO.output(greendrukte, GPIO.LOW)
+            GPIO.output(reddrukte, GPIO.HIGH)
+        elif dist > 25 and dist2 < 25 or dist2 > 25 and dist < 25:
+            GPIO.output(reddrukte, GPIO.LOW)
+            GPIO.output(greendrukte, GPIO.LOW)
+            GPIO.output(bluedrukte, GPIO.HIGH)
 
 except KeyboardInterrupt:
     print("Measurement stopped by User")

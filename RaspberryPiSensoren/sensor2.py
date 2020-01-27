@@ -51,14 +51,8 @@ def distance2():
 def lampjes():
     dist=distance2()
     if dist > 25:
-        GPIO.output(blue2, GPIO.LOW)
         GPIO.output(red2, GPIO.LOW)
         GPIO.output(green2, GPIO.HIGH)
-    elif dist < 20:
+    elif dist < 25:
         GPIO.output(green2, GPIO.LOW)
-        GPIO.output(blue2, GPIO.LOW)
         GPIO.output(red2, GPIO.HIGH)
-    elif dist > 20 and dist < 25:
-        GPIO.output(green2, GPIO.LOW)
-        GPIO.output(red2, GPIO.LOW)
-        GPIO.output(blue2, GPIO.HIGH)

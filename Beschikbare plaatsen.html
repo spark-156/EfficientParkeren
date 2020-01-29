@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
-
+    /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -16,9 +16,10 @@
     body{
         background-color: lightgray;
     }
-
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
 
+    /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
       background-color: lightgrey;
@@ -26,6 +27,7 @@
     }
 
 
+    /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
@@ -49,7 +51,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="website.html">Home</a></li>
+        <li class="active"><a href="index.html">Home</a></li>
         <li><a href="Beschikbare%20plaatsen.html">Aantal beschikbare plaaten</a></li>
         <li><a href="Verwachte%20Drukte.html">Verwachtte drukte</a></li>
         <li><a href="#"></a></li>
@@ -67,18 +69,29 @@
       <p><a href="#"></a></p>
     </div>
     <div class="col-sm-8 text-left">
-      <h1>P & R Science Park</h1>
-      <p>P & R Science Park ligt op het Utrecht Science Park.
-      De parkeerplaats is 24 uur per dag en 7 dagen per week geoepend.</p>
+      <h1>Beschikbare plaatsen</h1>
+
+<?php
+include 'index.php';
+echo index.$v;
+?>
+
+      <div>Momenteel zijn er</div>
+
+
+
+
+      <div> parkeerplaatsen beschikbaar</div>
+
+      <form action="index.php">
+          <input type="submit" value="DRUK HIER OM FRISO BIER TE GEVEN">
+      </form>
+
+
+
       <hr>
-      <h3>Handige Informatie</h3>
-      <p>- P & R beschikt over maar liefst 500 parkeerplekken en is onderdeel van een ovderdekte parkeergarage. </p>
-      <p>- De maximale doorrijhoogte is 1.90 meter.</p>
-      <p>- P & R heeft maar liefst 28 oplaadpunten voor elektrsiche voeruitgen. </p>
-      <p>- P & R heeft 13 parkeerplaatsen voor gehandicapten.</p>
-      <h4>Routebeschrijving</h4>
-      <p>- Neem op de A28 afslag 2. Volg de borden naar P+R Science Park/De Uithof.</p>
-      <img src="Schermafbeelding 2020-01-29 om 15.33.18.png" alt="Locatie" height="400" width="450">
+      <h3></h3>
+      <p></p>
     </div>
 
     </div>

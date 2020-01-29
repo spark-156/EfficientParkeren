@@ -1,13 +1,14 @@
 import RPi.GPIO as GPIO
 import time
-# GPIO Mode (BOARD / BCM)
+
+#Mode GPIO pinnen
 GPIO.setmode(GPIO.BCM)
 
-# set GPIO Pins
+#GPIO pinnen aanwijzen.
 GPIO_TRIGGER2 = 20
 GPIO_ECHO2 = 21
 
-blue2 = 26
+blauw2 = 26
 green2 = 19
 red2 = 13
 
@@ -21,38 +22,38 @@ GPIO.setup(blue2, GPIO.OUT)
 GPIO.output(blue2, GPIO.LOW)
 
 
-def distance2():
-    # set Trigger to HIGH
-    GPIO.output(GPIO_TRIGGER2, True)
-
+def afstand2():
+    # Zet de trigger aan.
+    GPIO.output(GPIO_TRIGGER, True)
     time.sleep(0.001)
-    GPIO.output(GPIO_TRIGGER2, False)
+    # Zet de trigger uit na 1 ms.
+    GPIO.output(GPIO_TRIGGER, False)
 
-    # set Trigger after 0.01ms to LOW
-    StartTime = time.time()
-    StopTime = time.time()
+    StartTijd = time.time()
+    StopTijd = time.time()
 
-    # save StartTime
-    while GPIO.input(GPIO_ECHO2) == 0:
-        StartTime = time.time()
+    # opslaan startTijd.
+    while GPIO.input(GPIO_ECHO) == 0:
+        StartTijd = time.time()
 
-    # save time of arrival
-    while GPIO.input(GPIO_ECHO2) == 1:
-        StopTime = time.time()
+    # Opslaan signaal aankomst
+    while GPIO.input(GPIO_ECHO) == 1:
+        StopTijd = time.time()
 
-    # time difference between start and arrival
-    TimeElapsed = StopTime - StartTime
-    # multiply with the sonic speed (34300 cm/s)
-    # and divide by 2, because there and back
-    distance2 = (TimeElapsed * 34300) / 2
+    # Verschil in tijd tussen versturen en ontvangen.
+    TijdVerlopen = StopTijd - StartTijd
+    # Vermenigvuldig met de geluidssnelheid. (34300 cm/s)
+    # Deel de afstand door 2, want het signaal gaat heen en weer.
+    Afstand2 = (TijdVerlopen * 34300) / 2
 
-    return distance2
+    return Afstand2
 
 def lampjes():
-    dist=distance2()
-    if dist > 25:
+    ''''Lampje gaat rood of groen branden aan de hand van de afstand tot het dichtstbijzijnde voorwerp.'''
+    AfstandSensor2=afstand2()
+    if AfstandSensor2 > 25:
         GPIO.output(red2, GPIO.LOW)
         GPIO.output(green2, GPIO.HIGH)
-    elif dist < 25:
+    elif AfstandSensor2 < 25:
         GPIO.output(green2, GPIO.LOW)
         GPIO.output(red2, GPIO.HIGH)

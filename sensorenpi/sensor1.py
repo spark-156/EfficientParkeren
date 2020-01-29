@@ -1,9 +1,10 @@
 import RPi.GPIO as GPIO
 import time
-# GPIO Mode (BOARD / BCM)
+
+#Mode GPIO pinnen
 GPIO.setmode(GPIO.BCM)
 
-# set GPIO Pins
+#GPIO pinnen aanwijzen
 GPIO_TRIGGER = 18
 GPIO_ECHO = 24
 
@@ -22,32 +23,31 @@ GPIO.setup(blue, GPIO.OUT)
 GPIO.output(blue, GPIO.LOW)
 
 
-def distance1():
-    # set Trigger to HIGH
+def afstand1():
+    # Zet de trigger aan.
     GPIO.output(GPIO_TRIGGER, True)
-
     time.sleep(0.001)
+    #Zet de trigger uit na 1 ms.
     GPIO.output(GPIO_TRIGGER, False)
 
-    # set Trigger after 0.01ms to LOW
-    StartTime = time.time()
-    StopTime = time.time()
+    StartTijd = time.time()
+    StopTijd = time.time()
 
-    # save StartTime
+    # opslaan startTijd.
     while GPIO.input(GPIO_ECHO) == 0:
-        StartTime = time.time()
+        StartTijd = time.time()
 
-    # save time of arrival
+    # Opslaan signaal aankomst
     while GPIO.input(GPIO_ECHO) == 1:
-        StopTime = time.time()
+        StopTijd = time.time()
 
-    # time difference between start and arrival
-    TimeElapsed = StopTime - StartTime
-    # multiply with the sonic speed (34300 cm/s)
-    # and divide by 2, because there and back
-    distance1 = (TimeElapsed * 34300) / 2
+    # Verschil in tijd tussen versturen en ontvangen.
+    TijdVerlopen = StopTijd - StartTijd
+    # Vermenigvuldig met de geluidssnelheid. (34300 cm/s)
+    # Deel de afstand door 2, want het signaal gaat heen en weer.
+    Afstand1 = (TijdVerlopen * 34300) / 2
 
-    return distance1
+    return Afstand1
 
 def lampjes():
     dist=distance1()

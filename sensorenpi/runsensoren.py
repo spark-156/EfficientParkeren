@@ -8,43 +8,49 @@ import MySqlConnection as sql
 db = mariadb.connect(host="server.local", user='RaspberryPiSensoren', passwd='DaanDaan123', db='ParkeergarageA3')
 cursor = db.cursor()
 
+#Mode GPIO pinnen
 GPIO.setmode(GPIO.BCM)
 
 bezet1, bezet2 = 0, 0
 switch1, switch2 = 1, 1
 
-greendrukte = 5
-bluedrukte = 6
-reddrukte = 11
+#GPIO pinnen aanwijzen
+groenDrukte = 5
+blauwDrukte = 6
+roodDrukte = 11
 
-GPIO.setup(reddrukte, GPIO.OUT)
-GPIO.output(reddrukte, GPIO.LOW)
-GPIO.setup(bluedrukte, GPIO.OUT)
-GPIO.output(bluedrukte, GPIO.LOW)
-GPIO.setup(greendrukte, GPIO.OUT)
-GPIO.output(greendrukte, GPIO.LOW)
+#instellingen GPIO pinnen bij opstarten
+GPIO.setup(roodDrukte, GPIO.OUT)
+GPIO.output(roodDrukte, GPIO.LOW)
+GPIO.setup(blauwDrukte, GPIO.OUT)
+GPIO.output(blauwDrukte, GPIO.LOW)
+GPIO.setup(groenDrukte, GPIO.OUT)
+GPIO.output(groenDrukte, GPIO.LOW)
 
 
 def drukte():
+    ''''Lampjes gaan een kleur branden aan de hand van hoe veel parkeerplekken bezet zijn.'''
     if dist1 > 25 and dist2 > 25:
-        GPIO.output(bluedrukte, GPIO.LOW)
-        GPIO.output(reddrukte, GPIO.LOW)
-        GPIO.output(greendrukte, GPIO.HIGH)
+        #Lampje brand groen.
+        GPIO.output(blauwDrukte, GPIO.LOW)
+        GPIO.output(roodDrukte, GPIO.LOW)
+        GPIO.output(groenDrukte, GPIO.HIGH)
     elif dist1 < 25 and dist2 < 25:
-        GPIO.output(bluedrukte, GPIO.LOW)
-        GPIO.output(greendrukte, GPIO.LOW)
-        GPIO.output(reddrukte, GPIO.HIGH)
+        #Lampje brand rood.
+        GPIO.output(blauwDrukte, GPIO.LOW)
+        GPIO.output(groenDrukte, GPIO.LOW)
+        GPIO.output(roodDrukte, GPIO.HIGH)
     elif dist1 > 25 and dist2 < 25 or dist2 > 25 and dist1 < 25:
-        GPIO.output(reddrukte, GPIO.LOW)
-        GPIO.output(greendrukte, GPIO.LOW)
-        GPIO.output(bluedrukte, GPIO.HIGH)
+        #Lampje brand blauw.
+        GPIO.output(roodDrukte, GPIO.LOW)
+        GPIO.output(groenDrukte, GPIO.LOW)
+        GPIO.output(blauwDrukte, GPIO.HIGH)
 
 
 try:
     while True:
-        switched = 0
-        dist1 = s1.distance1()
-        print("sensor 1 = %.1f cm" % dist1)
+        AfstandSensor1 = s1.afstand1()
+        print("sensor 1 = %.1f cm" % AfstandSensor1)
         if bezet1 == 1 and switch1 == 1:
             # raakt1 bezet
             sql.Aantalbezet(db, True)
@@ -55,12 +61,12 @@ try:
             sql.Aantalbezet(db, False)
             sql.Parkeerplek(db, 1, 0)
             switch1 = 1
-        elif dist1 < 25:
+        elif AfstandSensor1 < 25:
             bezet1 = 1
         elif dist1 > 25:
             bezet1 = 0
         s1.lampjes()
-        dist2 = s2.distance2()
+        AfstandSensor2 = s2.afstand2()
         print("sensor 2 = %.1f cm" % dist2)
         if bezet2 == 1 and switch2 == 1:
             sql.Aantalbezet(db, True)

@@ -19,7 +19,7 @@ groenDrukte = 5
 blauwDrukte = 6
 roodDrukte = 11
 
-#instellingen GPIO pinnen bij opstarten
+#Instellingen GPIO pinnen bij opstarten.
 GPIO.setup(roodDrukte, GPIO.OUT)
 GPIO.output(roodDrukte, GPIO.LOW)
 GPIO.setup(blauwDrukte, GPIO.OUT)
@@ -29,7 +29,8 @@ GPIO.output(groenDrukte, GPIO.LOW)
 
 
 def drukte():
-    ''''Lampjes gaan een kleur branden aan de hand van hoe veel parkeerplekken bezet zijn.'''
+    ''''Lampje gaat groen branden als alle plekken vrij zijn, blauw branden als 1 van de 2 plekken bezet is
+    en het lampje gaat rood branden als beide plekken bezet zijn.'''
     if dist1 > 25 and dist2 > 25:
         #Lampje brand groen.
         GPIO.output(blauwDrukte, GPIO.LOW)
@@ -63,7 +64,7 @@ try:
             switch1 = 1
         elif AfstandSensor1 < 25:
             bezet1 = 1
-        elif dist1 > 25:
+        elif AfstandSensor1 > 25:
             bezet1 = 0
         s1.lampjes()
         AfstandSensor2 = s2.afstand2()
@@ -76,9 +77,9 @@ try:
             sql.Aantalbezet(db, False)
             sql.Parkeerplek(db, 2, 0)
             switch2 = 1
-        elif dist2 < 25:
+        elif AfstandSensor2 < 25:
             bezet2 = 1
-        elif dist2 > 25:
+        elif AfstandSensor2 > 25:
             bezet2 = 0
         s2.lampjes()
         drukte()

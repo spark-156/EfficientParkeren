@@ -8,22 +8,23 @@ GPIO.setmode(GPIO.BCM)
 GPIO_TRIGGER = 18
 GPIO_ECHO = 24
 
-blue = 17
-green = 27
-red = 22
+blauw = 17
+groen = 27
+rood = 22
 
-# set GPIO direction (IN / OUT)
+#Instellingen GPIO pinnen bij opstarten.
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
-GPIO.setup(red, GPIO.OUT)
-GPIO.output(red, GPIO.LOW)
-GPIO.setup(green, GPIO.OUT)
-GPIO.output(green, GPIO.LOW)
-GPIO.setup(blue, GPIO.OUT)
-GPIO.output(blue, GPIO.LOW)
+GPIO.setup(rood, GPIO.OUT)
+GPIO.output(rood, GPIO.LOW)
+GPIO.setup(groen, GPIO.OUT)
+GPIO.output(groen, GPIO.LOW)
+GPIO.setup(blauw, GPIO.OUT)
+GPIO.output(blauw, GPIO.LOW)
 
 
 def afstand1():
+    ''''Berekent de afstand tussen de sensor en het dichtstbijzijnde voorwerp.'''
     # Zet de trigger aan.
     GPIO.output(GPIO_TRIGGER, True)
     time.sleep(0.001)
@@ -50,10 +51,12 @@ def afstand1():
     return Afstand1
 
 def lampjes():
-    dist=distance1()
-    if dist > 25:
-        GPIO.output(red, GPIO.LOW)
-        GPIO.output(green, GPIO.HIGH)
-    elif dist < 25:
-        GPIO.output(green, GPIO.LOW)
-        GPIO.output(red, GPIO.HIGH)
+    ''''Lampje gaat rood branden als de afstand tot het dichtstbijzijnde voorwerp kleiner dan 25centimeter is en
+     groen branden als de afstand groter dan 25 centimeter is.'''
+    Afstandsensor1=afstand1()
+    if Afstandsensor1 > 25:
+        GPIO.output(rood, GPIO.LOW)
+        GPIO.output(groen, GPIO.HIGH)
+    elif Afstandsensor1 < 25:
+        GPIO.output(groen, GPIO.LOW)
+        GPIO.output(rood, GPIO.HIGH)

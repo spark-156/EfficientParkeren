@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>P & R Science Park</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -14,7 +7,7 @@
       border-radius: 0;
     }
     body{
-        background-color: lightgray;
+        background-color: grey;
     }
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
@@ -22,7 +15,7 @@
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
-      background-color: lightgrey;
+      background-color: grey;
       height: 100%;
     }
 
@@ -51,10 +44,13 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="website.html">Home</a></li>
-        <li><a href="Beschikbare%20plaatsen.html">Aantal beschikbare plaaten</a></li>
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Aantal beschikbare plaaten</a></li>
         <li><a href="#">Verwachtte drukte</a></li>
         <li><a href="#"></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
       </ul>
     </div>
   </div>
@@ -68,8 +64,8 @@
       <p><a href="#"></a></p>
     </div>
     <div class="col-sm-8 text-left">
-      <h1>Verwachte drukte</h1>
-      <p>Wij verwachten dat het nu</p>
+      <h1>P & R Science Park</h1>
+      <p>Via deze website kunt u de beschikbaarheid controleren</p>
       <hr>
       <h3></h3>
       <p></p>
@@ -77,8 +73,8 @@
 
     </div>
   </div>
-</div>
 
 
 </body>
 </html>
+

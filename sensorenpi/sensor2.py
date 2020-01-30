@@ -13,6 +13,7 @@ groen2 = 19
 rood2 = 13
 
 #Instellingen GPIO pinnen bij opstarten.
+GPIO.setup(GPIO_TRIGGER2, GPIO.OUT)
 GPIO.setup(GPIO_ECHO2, GPIO.IN)
 GPIO.setup(rood2, GPIO.OUT)
 GPIO.output(rood2, GPIO.LOW)
@@ -25,20 +26,20 @@ GPIO.output(blauw2, GPIO.LOW)
 def afstand2():
     ''''Berekent de afstand tussen de sensor en het dichtstbijzijnde voorwerp.'''
     # Zet de trigger aan.
-    GPIO.output(GPIO_TRIGGER, True)
+    GPIO.output(GPIO_TRIGGER2, True)
     time.sleep(0.001)
     # Zet de trigger uit na 1 ms.
-    GPIO.output(GPIO_TRIGGER, False)
+    GPIO.output(GPIO_TRIGGER2, False)
 
     StartTijd = time.time()
     StopTijd = time.time()
 
     # opslaan startTijd.
-    while GPIO.input(GPIO_ECHO) == 0:
+    while GPIO.input(GPIO_ECHO2) == 0:
         StartTijd = time.time()
 
     # Opslaan signaal aankomst
-    while GPIO.input(GPIO_ECHO) == 1:
+    while GPIO.input(GPIO_ECHO2) == 1:
         StopTijd = time.time()
 
     # Verschil in tijd tussen versturen en ontvangen.

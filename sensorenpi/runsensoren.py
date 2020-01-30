@@ -31,17 +31,17 @@ GPIO.output(groenDrukte, GPIO.LOW)
 def drukte():
     ''''Lampje gaat groen branden als alle plekken vrij zijn, blauw branden als 1 van de 2 plekken bezet is
     en het lampje gaat rood branden als beide plekken bezet zijn.'''
-    if dist1 > 25 and dist2 > 25:
+    if AfstandSensor1 > 25 and AfstandSensor2 > 25:
         #Lampje brand groen.
         GPIO.output(blauwDrukte, GPIO.LOW)
         GPIO.output(roodDrukte, GPIO.LOW)
         GPIO.output(groenDrukte, GPIO.HIGH)
-    elif dist1 < 25 and dist2 < 25:
+    elif AfstandSensor1 < 25 and AfstandSensor2 < 25:
         #Lampje brand rood.
         GPIO.output(blauwDrukte, GPIO.LOW)
         GPIO.output(groenDrukte, GPIO.LOW)
         GPIO.output(roodDrukte, GPIO.HIGH)
-    elif dist1 > 25 and dist2 < 25 or dist2 > 25 and dist1 < 25:
+    elif AfstandSensor1 > 25 and AfstandSensor2 < 25 or AfstandSensor2 > 25 and AfstandSensor1 < 25:
         #Lampje brand blauw.
         GPIO.output(roodDrukte, GPIO.LOW)
         GPIO.output(groenDrukte, GPIO.LOW)
@@ -68,7 +68,7 @@ try:
             bezet1 = 0
         s1.lampjes()
         AfstandSensor2 = s2.afstand2()
-        print("sensor 2 = %.1f cm" % dist2)
+        print("sensor 2 = %.1f cm" % AfstandSensor2)
         if bezet2 == 1 and switch2 == 1:
             sql.Aantalbezet(db, True)
             sql.Parkeerplek(db, 2, 1)

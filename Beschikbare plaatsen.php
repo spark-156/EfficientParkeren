@@ -70,7 +70,7 @@
     </div>
     <div class="col-sm-8 text-left">
       <h1>Beschikbare plaatsen</h1>
-
+        <div>De aantal bezette plaatsen zijn momenteel:</div>
      <?php
 
 class TableRows extends RecursiveIteratorIterator {
@@ -114,9 +114,10 @@ catch(PDOException $e) {
 }
 $conn = null;
 echo "</table>";
+echo "plek(ken) om " . date("h:i:sa");
 ?>
 
-      <div>Druk op het knopje hieronder om de aantal bezette parkeerplaatsen te weergeven</div>
+      <div>Druk op het knopje hieronder om te refreshen</div>
 
       <form action="Beschikbare%20plaatsen.php">
           <input type="submit" value="Refresh">

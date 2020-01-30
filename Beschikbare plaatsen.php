@@ -52,7 +52,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.html">Home</a></li>
-        <li><a href="Beschikbare%20plaatsen.html">Aantal beschikbare plaaten</a></li>
+        <li><a href="Beschikbare%20plaatsen.php">Aantal beschikbare plaaten</a></li>
         <li><a href="Verwachte%20Drukte.html">Verwachtte drukte</a></li>
         <li><a href="#"></a></li>
       </ul>
@@ -71,15 +71,55 @@
     <div class="col-sm-8 text-left">
       <h1>Beschikbare plaatsen</h1>
 
-<?php
-include 'index.php';
-echo index.$v;
+     <?php
+
+class TableRows extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
+
+    function current() {
+        return "<td style='width: 150px; border: 1px solid black;'>" . parent::current(). "</td>";
+    }
+
+    function beginChildren() {
+        echo "<tr>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+    }
+}
+
+$servername = "localhost";
+$username = "PHPMyAdmin";
+$password = "Youtube";
+$dbname = "ParkeergarageA3";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare("SELECT AantalBezet FROM AantalBezet ORDER BY ID DESC LIMIT 1");
+    $stmt->execute();
+
+    // set the resulting array to associative
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+        echo $v;
+    }
+}
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+$conn = null;
+echo "</table>";
 ?>
 
       <div>Druk op het knopje hieronder om de aantal bezette parkeerplaatsen te weergeven</div>
 
-      <form action="index.php">
-          <input type="submit" value="Druk hier">
+      <form action="Beschikbare%20plaatsen.php">
+          <input type="submit" value="Refresh">
       </form>
 
 
